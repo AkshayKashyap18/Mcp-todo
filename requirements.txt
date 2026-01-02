@@ -1,0 +1,11 @@
+mcp
+langchain
+langchain-groq
+groq
+supabase
+pydantic
+python-dotenv
+streamlit
+dateparser
+pytest
+pytest-asyncio
