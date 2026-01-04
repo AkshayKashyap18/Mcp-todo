@@ -9,3 +9,6 @@ streamlit
 dateparser
 pytest
 pytest-asyncio
+fastapi
+uvicorn
+python-multipart

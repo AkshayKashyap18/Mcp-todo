@@ -17,7 +17,10 @@ from src.mcp_server.tools import (
     handle_add_task,
     handle_list_tasks,
     handle_update_task,
-    handle_delete_task
+    handle_delete_task,
+    handle_smart_add,
+    handle_search_tasks,
+    handle_smart_update
 )
 
 # Configure logging
@@ -152,6 +155,48 @@ async def list_tools() -> list[Tool]:
                 },
                 "required": ["task_id"]
             }
+        ),
+        Tool(
+            name="smart_add",
+            description="Create a task from natural language (AI-powered)",
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "natural_language": {
+                        "type": "string",
+                        "description": "Natural language task description (e.g., 'Buy groceries tomorrow at 5pm, urgent')"
+                    }
+                },
+                "required": ["natural_language"]
+            }
+        ),
+        Tool(
+            name="search_tasks",
+            description="Search tasks using natural language (AI-powered)",
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "description": "Natural language search query (e.g., 'Show me high priority tasks')"
+                    }
+                },
+                "required": ["query"]
+            }
+        ),
+        Tool(
+            name="smart_update",
+            description="Update a task using natural language with fuzzy matching (AI-powered)",
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "natural_language": {
+                        "type": "string",
+                        "description": "Natural language update command (e.g., 'Mark the groceries task as done')"
+                    }
+                },
+                "required": ["natural_language"]
+            }
         )
     ]
 
@@ -169,6 +214,7 @@ async def call_tool(name: str, arguments: Any) -> list[TextContent]:
         List of text content responses
     """
     try:
+        # Deterministic tools
         if name == "add_task":
             return await handle_add_task(arguments)
         elif name == "list_tasks":
@@ -177,6 +223,13 @@ async def call_tool(name: str, arguments: Any) -> list[TextContent]:
             return await handle_update_task(arguments)
         elif name == "delete_task":
             return await handle_delete_task(arguments)
+        # AI-powered tools
+        elif name == "smart_add":
+            return await handle_smart_add(arguments)
+        elif name == "search_tasks":
+            return await handle_search_tasks(arguments)
+        elif name == "smart_update":
+            return await handle_smart_update(arguments)
         else:
             return [TextContent(type="text", text=f"Unknown tool: {name}")]
     except Exception as e:

@@ -46,12 +46,17 @@ logs/
 *.sqlite
 *.sqlite3
 
+# Node.js / Frontend
+node_modules/
+frontend/node_modules/
+frontend/dist/
+.eslintcache
+
 # MCP specific
 mcp_todo_architecture*.md
 
 # OS files
 Thumbs.db
-.DS_Store
 
 # UV lock file (optional - some prefer to commit this)
 # uv.lock

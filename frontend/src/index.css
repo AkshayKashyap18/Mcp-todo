@@ -1,0 +1,137 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Zinc-like Dark Theme (Default) */
+    --background: 240 10% 4%;     /* Very dark grey almost black */
+    --foreground: 0 0% 98%;       /* White text */
+
+    --card: 240 10% 6%;
+    --card-foreground: 0 0% 98%;
+ 
+    --popover: 240 10% 4%;
+    --popover-foreground: 0 0% 98%;
+ 
+    --primary: 263 70% 50%;       /* Purple accent from screenshot */
+    --primary-foreground: 210 40% 98%;
+ 
+    --secondary: 240 4% 16%;      /* Darker grey for secondary items */
+    --secondary-foreground: 210 40% 98%;
+ 
+    --muted: 240 4% 16%;
+    --muted-foreground: 215 20% 65%;
+ 
+    --accent: 240 4% 16%;         /* Hover state */
+    --accent-foreground: 0 0% 98%;
+ 
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 4% 16%;
+    --input: 240 4% 16%;
+    --ring: 263 70% 50%;
+ 
+    --radius: 0.75rem;            /* Rounded corners */
+  }
+ 
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+ 
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+ 
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+ 
+    --primary: 263 70% 50%;
+    --primary-foreground: 210 40% 98%;
+ 
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 210 40% 98%;
+ 
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 215 20.2% 65.1%;
+ 
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+ 
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+ 
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+  }
+}
+ 
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* Custom Scrollbar for Webkit */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-secondary rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/50;
+  }
+}
+
+/* --- Paper Textures --- */
+
+.paper-graph {
+  background-image: 
+    linear-gradient(rgba(0, 100, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 100, 255, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.paper-lined {
+  background-image: linear-gradient(rgba(0, 100, 150, 0.1) 1px, transparent 1px);
+  background-size: 100% 1.5rem;
+  background-position: 0 1.2rem;
+}
+
+.paper-margin {
+  border-left: 2px solid rgba(255, 100, 100, 0.2) !important;
+}
+
+/* Add some texture/grain */
+.paper-grain {
+  position: relative;
+}
+.paper-grain::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: url("https://www.transparenttextures.com/patterns/pinstriped-suit.png");
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Custom handwriting-like font weights or helpers */
+.font-handwriting {
+  font-family: 'Inter', sans-serif; /* Fallback */
+}
+
+/* Fallback font styling for the "Physical" feel */
+.note-shadow {
+  box-shadow: 
+    2px 2px 5px rgba(0,0,0,0.1),
+    0 4px 10px rgba(0,0,0,0.05);
+}
